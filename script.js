@@ -20,7 +20,7 @@ const temp = document.getElementById("temp"),
   celciusBtn = document.querySelector(".celcius"),
   hourlyBtn = document.querySelector(".hourly"),
  weekBtn = document.querySelector(".week"),
- tempUnit = document.querySelectorAll(".temo-unit")
+ tempUnit = document.querySelectorAll(".temp-unit")
 
 let currentCity = "";
 let currentUnit = "c";
@@ -69,8 +69,8 @@ function getPublicIP() {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-      currentCity = data.currentCity;
-     // getWeatherData(data.city,currentUnit, hourlyWeek)
+      currentCity = data.city;
+    getWeatherData(data.city,currentUnit, hourlyWeek)
     });
 }
 getPublicIP();
@@ -266,7 +266,7 @@ function updateForecast(data,unit,type){
     let iconSrc = getIcon(iconCondition);
     let tempUnit = "°C";
     if(unit==="f"){
-      tempUnit==="°F";
+      tempUnit="°F";
     }
     card.innerHTML = `
     <h2 class="day-name">${dayName}</h2>
@@ -283,6 +283,25 @@ function updateForecast(data,unit,type){
   }
 }
 
+function changeBackground(condition){
+  let bg = "";
+  const body = document.querySelector("body");
+  if (condition === "partly-cloud-day") {
+   bg = "images/pc.jpg";
+  } else if (condition === "partly-cloudy-night") {
+    bg = "images/pcn.jpg";
+  } else if (condition === "rain") {
+    bg = "images/rain.jpg";
+  } else if (condition === "clear-day") {
+    bg ="images/cd.jpg";
+  } else if (condition === "clear-night") {
+    bg = "images/cn.jpg";
+  } else {
+    bg = "images/pc.jpg";
+  }
+  body.style.backgroundImage = `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url(${bg})`;
+}
+
 fahrenheitBtn.addEventListener("click", () => {
   changeUnit("f");
 });
@@ -296,7 +315,7 @@ function changeUnit (unit){
     currentUnit = unit;{
       //change unit on document
       tempUnit.forEach((elem)=>{
-        elem.innerText = `${unit.toUpperCase()}`;
+        elem.innerText = `°${unit.toUpperCase()}`;
       });
       if(unit === 'c'){
         celciusBtn.classList.add("active");
