@@ -5,8 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <script src="https://kit.fontawesome.com/64d58efce2.js" 
-    crossorigin="anonymous"
+    <script
+      src="https://kit.fontawesome.com/64d58efce2.js"
+      crossorigin="anonymous"
     ></script>
     <title>Weather App</title>
   </head>
@@ -43,7 +44,7 @@
           </div>
         </div>
         <div class="location">
-          <div  class="location-icon">
+          <div class="location-icon">
             <i class="fas fa-map-marker-alt"></i>
           </div>
           <div class="location-text">
@@ -53,7 +54,7 @@
       </div>
       <div class="main">
         <nav>
-          <ul class="option">
+          <ul class="options">
             <button class="hourly">today</button>
             <button class="week active">week</button>
           </ul>
@@ -62,6 +63,66 @@
             <button class="fahrenheit">°F</button>
           </ul>
         </nav>
+        <div class="cards" id="weather-cards">
+          <div class="card">
+            <h2 class="day-name">Monday</h2>
+            <div class="card-icon">
+              <img src="icons/moon/15.png" alt="" />
+            </div>
+            <div class="day-temp">
+              <h2 class="temp">32</h2>
+              <span class="temp-unit">°C</span>
+            </div>
+          </div>
+        </div>
+        <div class="highlights">
+          <h2 class="heading">today's highlights</h2>
+          <div class="cards">
+            <div class="card2">
+              <h4 class="card-heading">UV Index</h4>
+              <div class="content">
+                <p class="wind-speed">0</p>
+                <p class="">low</p>
+              </div>
+            </div>
+            <div class="card2">
+              <h4 class="card-heading">Wind status</h4>
+              <div class="content">
+                <p class="wind">0</p>
+                <p class="wind-status">low</p>
+              </div>
+            </div>
+            <div class="card2">
+              <h4 class="card-heading">Sunrise & Sunset</h4>
+              <div class="content">
+                <p class="sunrise">0</p>
+                <p class="sunset">low</p>
+              </div>
+            </div>
+            <div class="card2">
+              <h4 class="card-heading">Humidity</h4>
+              <div class="content">
+                <p class="humidity">0</p>
+                <p class="humidity-status">low</p>
+              </div>
+            </div>
+            <div class="card2">
+              <h4 class="card-heading">Visibility</h4>
+              <div class="content">
+                <p class="visibility">0</p>
+                <p class="visibility-status">low</p>
+              </div>
+            </div>
+            <div class="card2">
+              <h4 class="card-heading">Air Quality</h4>
+              <div class="content">
+                <p class="air-quality">0</p>
+                <p class="air-quality-satus">low</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="credits">Crafted by Kristiyan Mitev</p>
       </div>
     </div>
 
