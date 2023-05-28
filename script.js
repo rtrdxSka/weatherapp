@@ -1,3 +1,7 @@
+// import cities from "./cities";
+// import {cities} from "./cities.js";
+// import cities from "./cities.js";
+// const cities = require("./cities.mjs")
 const temp = document.getElementById("temp"),
   date = document.getElementById("date-time"),
   currentLocation = document.getElementById("location"),
@@ -20,7 +24,9 @@ const temp = document.getElementById("temp"),
   celciusBtn = document.querySelector(".celcius"),
   hourlyBtn = document.querySelector(".hourly"),
  weekBtn = document.querySelector(".week"),
- tempUnit = document.querySelectorAll(".temp-unit")
+ tempUnit = document.querySelectorAll(".temp-unit"),
+ searchForm = document.querySelector("#search"),
+ search = document.querySelector("#query")
 
 let currentCity = "";
 let currentUnit = "c";
@@ -70,7 +76,7 @@ function getPublicIP() {
     .then((data) => {
       console.log(data);
       currentCity = data.city;
-    getWeatherData(data.city,currentUnit, hourlyWeek)
+   getWeatherData(data.city,currentUnit, hourlyWeek)
     });
 }
 getPublicIP();
@@ -352,3 +358,56 @@ function changeTimeSpan(unit){
     getWeatherData(currentCity,currentUnit,hourlyWeek);
   }
 }
+
+searchForm.addEventListener("submit", (e) =>{
+  e.preventDefault();
+  let location = search.value;
+  if(location){
+    currentCity = location;
+    getWeatherData(location,currentUnit,hourlyWeek)
+  }
+})
+//array of cities to suggest or use api
+
+var currentFocus;
+//event listener on search input
+search.addEventListener("input", function (e) {
+  removeSuggestions();
+  var a,
+    b,
+    i,
+    val = this.value;
+  if (!val) {
+    return false;
+  }
+  currentFocus = -1;
+
+  a = document.createElement("ul");
+  a.setAttribute("id", "suggestions");
+
+  this.parentNode.appendChild(a);
+
+  for (i = 0; i < cities.length; i++) {
+    /*check if the item starts with the same letters as the text field value:*/
+    if (
+      cities[i].name.substr(0, val.length).toUpperCase() == val.toUpperCase()
+    ) {
+      /*create a li element for each matching element:*/
+      b = document.createElement("li");
+      /*make the matching letters bold:*/
+      b.innerHTML =
+        "<strong>" + cities[i].name.substr(0, val.length) + "</strong>";
+      b.innerHTML += cities[i].name.substr(val.length);
+      /*insert a input field that will hold the current array item's value:*/
+      b.innerHTML += "<input type='hidden' value='" + cities[i].name + "'>";
+      /*execute a function when someone clicks on the item value (DIV element):*/
+      b.addEventListener("click", function (e) {
+        /*insert the value for the autocomplete text field:*/
+        search.value = this.getElementsByTagName("input")[0].value;
+        removeSuggestions();
+      });
+
+      a.appendChild(b);
+    }
+  }
+});
