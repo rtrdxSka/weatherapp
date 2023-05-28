@@ -421,3 +421,48 @@ function removeSuggestions(){
 }
 
 //up and down keys to select suggestion
+search.addEventListener("keydown",function (e) {
+  let x = document.getElementById("suggestions");
+  //selecting all the li's of the suggestions
+  if(x) x = x.getElementsByTagName("li");
+
+  if(e.keyCode == 40){
+    //if keyCode is down
+    currentFocus++;
+    addActive(x);
+  }else if(e.keyCode==38){
+    //if keycode is upbutton
+    currentFocus--;
+    addActive(x);
+  }
+  if(e.keyCode==13){
+    //if enter is pressed add the current sleceted suggestion to input field
+
+    e.preventDefault();
+    if(currentFocus > -1){
+      //if any suggestion is selected click it
+      if(x) x[currentFocus].click();
+    }
+  }
+});
+
+function addActive(x) {
+  //if there is no suggestion return as it is
+
+  if(!x) return false;
+  removeActive(x);
+  // if current focus is more than the length of the suggestion array make it 0
+  if(currentFocus >= x.length) currentFocus = 0;
+  //if its less  than 0 make it last suggestion equals
+  if(currentFocus < 0) currentFocus = x.length - 1;
+  //ading active class on focused
+  x[currentFocus].classList.add("active");
+
+  
+}
+
+function removeActive(x){
+  for(let i=0;i<x.length;i++){
+    x[i].classList.remove("active");
+  }
+}
