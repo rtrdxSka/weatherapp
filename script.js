@@ -1,6 +1,7 @@
 // import cities from "./cities";
 // import {cities} from "./cities.js";
-// import cities from "./cities.js";
+import cities from "./cities.js";
+console.log(cities);
 // const cities = require("./cities.mjs")
 const temp = document.getElementById("temp"),
   date = document.getElementById("date-time"),
@@ -369,11 +370,11 @@ searchForm.addEventListener("submit", (e) =>{
 })
 //array of cities to suggest or use api
 
-var currentFocus;
+let currentFocus;
 //event listener on search input
 search.addEventListener("input", function (e) {
   removeSuggestions();
-  var a,
+  let a,
     b,
     i,
     val = this.value;
@@ -390,16 +391,16 @@ search.addEventListener("input", function (e) {
   for (i = 0; i < cities.length; i++) {
     /*check if the item starts with the same letters as the text field value:*/
     if (
-      cities[i].name.substr(0, val.length).toUpperCase() == val.toUpperCase()
+      cities[i].city.substr(0, val.length).toUpperCase() == val.toUpperCase()
     ) {
       /*create a li element for each matching element:*/
       b = document.createElement("li");
       /*make the matching letters bold:*/
       b.innerHTML =
-        "<strong>" + cities[i].name.substr(0, val.length) + "</strong>";
-      b.innerHTML += cities[i].name.substr(val.length);
+        "<strong>" + cities[i].city.substr(0, val.length) + "</strong>";
+      b.innerHTML += cities[i].city.substr(val.length);
       /*insert a input field that will hold the current array item's value:*/
-      b.innerHTML += "<input type='hidden' value='" + cities[i].name + "'>";
+      b.innerHTML += "<input type='hidden' value='" + cities[i].city + "'>";
       /*execute a function when someone clicks on the item value (DIV element):*/
       b.addEventListener("click", function (e) {
         /*insert the value for the autocomplete text field:*/
@@ -411,3 +412,12 @@ search.addEventListener("input", function (e) {
     }
   }
 });
+
+function removeSuggestions(){
+  //selecting ul which is being add on search input
+  let x = document.getElementById("suggestions");
+  // if x exists remove it
+  if(x) x.parentNode.removeChild(x);
+}
+
+//up and down keys to select suggestion
